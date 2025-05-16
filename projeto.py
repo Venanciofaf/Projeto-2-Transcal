@@ -28,10 +28,10 @@ class TrussElement:
 
     def get_dof_indices(self):
         return [
-            self.node_start,
-            self.node_start * 2,
-            self.node_end * 2 - 1,
-            self.node_end * 2 
+            2 * self.node_start,       # ux_i
+            2 * self.node_start + 1,   # uy_i
+            2 * self.node_end,         # ux_j
+            2 * self.node_end + 1      # uy_j
         ]
 
 # Montagem da matriz de rigidez global
@@ -71,13 +71,13 @@ def gauss_seidel(A, b, x0=None, tol=1e-6, max_iter=10000):
 # Dados da treliça (coordenadas dos nós)
 coords = {
     0: (0.00, 0.00),  # Nó 1
-    1: (0.40, 0.00),  # Nó 2
-    2: (0.00, 0.33)   # Nó 3
+    1: (0.00, 0.40),  # Nó 2
+    2: (0.30, 0.40)   # Nó 3
 }
 
 # Propriedades dos elementos
-E = 2.1e9        # Pa
-A = 9.2e-4       # m²
+E = 210e9        # Pa
+A = 2e-4         # m²
 
 # Definição dos elementos
 elements = [
